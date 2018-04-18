@@ -6,16 +6,12 @@ for work this code put json file in root derectory and write this label
 
 # Quickstart
 
-[TODO]
-
 Example of script launch on Linux, Python 3.5:
 
 ```bash
 
-$ python pprint_json.py
-# TODO add output example
+$ python pprint_json.py <"название файла".json>
 
-введите путь к файлу: data.json
 [
     {
         "Id": "79742784-9ef3-4543-bc98-a219a8903c18",
