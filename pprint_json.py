@@ -23,12 +23,13 @@ def input_json_path():
             return file_json
         else:
             print("Данный файл имеет расширение не .json")
-            exit(0)
+            return 0
     else:
         print("Такого файла не существует")
-        exit(0)
+        return 0
 
 
 if __name__ == '__main__':
-    json_path = load_data(input_json_path())
-    pretty_print_json(json_path)
+    inputh_path = input_json_path()
+    if inputh_path!=0:
+        pretty_print_json(load_data(inputh_path))
