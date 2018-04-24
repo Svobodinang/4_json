@@ -4,33 +4,35 @@ import os
 
 
 def load_data(filepath):
-    with open(filepath, encoding="utf-8") as json_file:
-        return json.load(json_file)
+    try:
+        with open(filepath, encoding="utf-8") as json_file:
+            return json.load(json_file)
+    except json.decoder.JSONDecodeError:
+        print("В файле не json текст")
+        return None
 
 
-def pretty_print_json(data_decoder):
+def pretty_print_json(decoded_data):
     print(json.dumps(
-        data_decoder,
+        decoded_data,
         ensure_ascii=False,
         indent=4
     ))
 
 
-def check_json_file():
-    try:
-        load_data(sys.argv[1])
+def check_path_file(path):
+    if os.path.isfile(path):
         return "ok"
-    except json.decoder.JSONDecodeError:
-        print("В файлене json текст")
-        return None
-    except IndexError:
-        print("Вы не указали путь к файлу")
-        return None
-    except FileNotFoundError:
-        print("Такого файла не существует")
+    else:
         return None
 
 
 if __name__ == '__main__':
-    if check_json_file() is not None:
-        pretty_print_json(load_data(sys.argv[1]))
+    if len(sys.argv) < 2:
+        exit("Вы не ввели путь к файлу")
+    if check_path_file(sys.argv[1]) is None:
+        exit("Такого файла не существует")
+    if load_data(sys.argv[1]) is None:
+        exit()
+
+    pretty_print_json(load_data(sys.argv[1]))
