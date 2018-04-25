@@ -25,7 +25,9 @@ if __name__ == '__main__':
     file_path = sys.argv[1]
     if not os.path.isfile(file_path):
     	exit("Такого файла не существует")
-    if load_data(file_path) is None:
+        
+    decoded_file = load_data(file_path)
+    if decoded_file is None:
         exit("В файле не json текст")
 
-    pretty_print_json(load_data(file_path))
+    pretty_print_json(decoded_file)
